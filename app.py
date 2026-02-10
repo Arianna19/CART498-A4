@@ -1,30 +1,71 @@
 from flask import Flask, render_template, request
-import openai
+from openai import OpenAI
 import os
+import base64
 from dotenv import load_dotenv
 
 load_dotenv()  # Load environment variables from .env
 
 app = Flask(__name__)
-openai.api_key = os.getenv("OPENAI_API_KEY")  # Securely load API key
+
+# Initialize OpenAI client securely
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+JUNG_PROMPT = """
+You are a Jungian dream analyst.
+Interpret dreams using Carl Jung's analytical psychology.
+Focus on archetypes, symbols, the collective unconscious,
+and the process of individuation.
+"""
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    result = None
+    interpretation = None
+    image_data = None
+
     if request.method == "POST":
-        prompt = request.form["prompt"]
+        dream = request.form["prompt"]
+
         try:
-            response = openai.responses.create(
-                model="gpt-4.1",  
-                input=[{"role": "developer", "content": "You are a psychedelic AI that speaks in the way Yoda from star wars speaks and use some William Shakespeare to make your answers barely comprehendable."}, 
-                          {"role": "user", "content": prompt}],
-                          temperature=1.2,
-                          max_output_tokens=50
+            # ---- TEXT INTERPRETATION ----
+            text_response = client.responses.create(
+                model="gpt-4.1",
+                input=[
+                    {"role": "system", "content": JUNG_PROMPT},
+                    {"role": "user", "content": dream}
+                ],
+                temperature=0.8,
+                max_output_tokens=250
             )
-            result = response.output_text
+
+            interpretation = text_response.output_text
+
+            # ---- IMAGE GENERATION ----
+            image_prompt = f"""
+            A surreal dream scene inspired by Jungian psychology.
+            Symbolic, abstract, and emotionally rich imagery
+            representing this dream interpretation:
+            {interpretation}
+            """
+
+            image_response = client.images.generate(
+                model="gpt-image-1",
+                prompt=image_prompt,
+                size="1024x1024"
+            )
+
+            # Convert base64 to displayable image
+            image_base64 = image_response.data[0].b64_json
+            image_data = f"data:image/png;base64,{image_base64}"
+
         except Exception as e:
-            result = f"Error: {str(e)}"
-    return render_template("index.html", result=result)
+            interpretation = f"Error: {str(e)}"
+
+    return render_template(
+        "index.html",
+        interpretation=interpretation,
+        image_data=image_data
+    )
 
 if __name__ == "__main__":
-    app.run(debug=True)  # Run locally for testing
+    app.run(debug=True)
