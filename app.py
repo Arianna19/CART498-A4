@@ -51,7 +51,7 @@ def index():
             image_response = client.images.generate(
                 model="gpt-image-1",
                 prompt=image_prompt,
-                size="512x512"
+                size="auto"
             )
 
             # Convert base64 to displayable image
