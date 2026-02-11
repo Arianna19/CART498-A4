@@ -11,3 +11,11 @@ The ChatBox allows users to enter a dream description into a text field. Once th
 
 **Design, Developement and Challenges**<br>
 The workflow involved Flask, OpenAI API, Render and GitHub. One major challenge was the deployment on Render, specifically in the memory limitation when generating the images. The early versions I had caused many internal server errors due to worker memory usage within Render logs. I debugged this using both ChatGPT, limiting Gunicorn to a single worker and keeping the CSS terribly simple avoiding visual effects. Another huge challege was debugging, every small code change needed to be pushed on GitHub, waiting for Reender to redeploy the latest commit and then testing live. This made every iteration super slow and often frustrating especially when trying to fix small bugs or slighlty modify the visual look of the site. 
+
+**Testing, Reflection and Improvements**<br>
+The ChatBox was tested by submitting multiple dream scenarious to ensure it functioned and generated the image properly. I also tested the same dreams to make sure the analysis were consistent and made sense. The biggest testing phase was for the image generation it took the longest to get it to work to the point I only have $0.42 left in my API to use. If I were to expand on this ChatBox, there could be a image saving feature, multiple interpretation or letting the user choose from a drop-down list another psychologist to analyze the dream. Basically, more pespectives on the dream since it's such an open topic. Overall, this project was mildly frustrating but highlighted creative potential and the limitations of deploying AI-driven sites in real/live environments. So, it was hard to be creative and artistic within the scope of these platforms.
+
+
+
+
+
