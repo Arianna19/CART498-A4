@@ -8,57 +8,134 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        /* Background */
         body {
-            background: black;
-            color: #eee;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            color: #f0f0f5;
+            font-family: 'Cinzel', serif;
+            min-height: 100vh;
         }
-        .panel {
-            background: #f5f3dc;
-            color: #000;
-            border-radius: 30px;
+
+        /* Center container */
+        .container {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        /* Dream banner */
+        .dream-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f5e8c7;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.6);
+            margin-bottom: 25px;
+        }
+
+        /* Form card */
+        .dream-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
             padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            max-width: 800px;
+        }
+
+        textarea {
+            background: rgba(255, 255, 255, 0.12);
+            color: #efe;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+
+        textarea::placeholder {
+            color: #ddd;
+        }
+
+        /* Buttons */
+        .btn-dream {
+            background: #2e3153;
+            color: #f5e8c7;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid #dad4b0;
+            transition: 0.2s ease;
+        }
+
+        .btn-dream:hover {
+            background: #42476b;
+            color: #fff;
+        }
+
+        /* Interpretation box */
+        .interpretation-box {
+            background: rgba(255, 255, 255, 0.14);
+            border-left: 4px solid #f5e8c7;
+            border-right: 4px solid #f5e8c7;
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 25px;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        /* Image */
+        .dream-img {
             margin-top: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            max-width: 90%;
         }
     </style>
+
+    <!-- Stylish font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<div class="container text-center mt-5">
+<div class="container">
 
-    <div class="panel">
-        <h1>Dream Interpreter</h1>
+    <!-- Title -->
+    <div class="dream-title">Dream Interpreter</div>
+
+    <!-- Input form -->
+    <div class="dream-card">
+        <form method="POST">
+            <textarea
+                name="prompt"
+                rows="4"
+                class="form-control"
+                placeholder="Describe your dream..."
+                required></textarea>
+
+            <button type="submit" class="btn btn-dream w-100 mt-3">
+                Interpret Dream
+            </button>
+        </form>
     </div>
 
-    <form method="POST" class="mt-4 mx-auto col-md-8">
-        <textarea
-            name="prompt"
-            rows="4"
-            class="form-control"
-            placeholder="Describe your dream..."
-            required></textarea>
-
-        <button type="submit" class="btn btn-primary mt-3 w-100">
-            Dream
-        </button>
-    </form>
-
+    <!-- Echoed dream text -->
     {% if dream_text %}
-        <div class="panel">
+        <div class="dream-card interpretation-box">
+            <strong>Your dream:</strong>
             <p>{{ dream_text }}</p>
         </div>
     {% endif %}
 
+    <!-- Jungian interpretation -->
     {% if interpretation %}
-        <div class="panel">
-            <h3>Interpretation</h3>
+        <div class="dream-card interpretation-box">
+            <strong>Interpretation</strong>
             <p>{{ interpretation }}</p>
         </div>
     {% endif %}
 
+    <!-- Generated image -->
     {% if image_ready %}
-        <div class="mt-4">
-            <img src="/image" class="img-fluid rounded shadow">
-        </div>
+        <img src="/image" class="dream-img">
     {% endif %}
 
 </div>
