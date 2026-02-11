@@ -18,6 +18,7 @@ You are a Jungian dream analyst.
 Interpret dreams using Carl Jung's analytical psychology.
 Focus on symbols, archetypes, the unconscious, and individuation.
 Write clearly and thoughtfully.
+Ask a question depending on the analysis given about how the user is doing. 
 """
 
 @app.route("/", methods=["GET", "POST"])
@@ -48,7 +49,7 @@ def index():
             # ---- IMAGE GENERATION ----
             image_response = client.images.generate(
                 model="gpt-image-1",
-                prompt=f"Surreal dream imagery inspired by this dream: {dream_text}",
+                prompt=f"Surreal dream imagery inspired by this dream infused with kawaii style: {dream_text}",
                 size="auto"
             )
 
