@@ -15,6 +15,7 @@ The workflow involved Flask, OpenAI API, Render and GitHub. One major challenge 
 **Testing, Reflection and Improvements**<br>
 The ChatBox was tested by submitting multiple dream scenarious to ensure it functioned and generated the image properly. I also tested the same dreams to make sure the analysis were consistent and made sense. The biggest testing phase was for the image generation it took the longest to get it to work to the point I only have $0.42 left in my API to use. If I were to expand on this ChatBox, there could be a image saving feature, multiple interpretation or letting the user choose from a drop-down list another psychologist to analyze the dream. Basically, more pespectives on the dream since it's such an open topic. Overall, this project was mildly frustrating but highlighted creative potential and the limitations of deploying AI-driven sites in real/live environments. So, it was hard to be creative and artistic within the scope of these platforms.
 
+<img width="1885" height="914" alt="image" src="https://github.com/user-attachments/assets/04a4be46-9642-479d-96c7-ce3590e1c666" />
 
 
 
