@@ -18,7 +18,6 @@ You are a Jungian dream analyst.
 Interpret dreams using Carl Jung's analytical psychology.
 Focus on symbols, archetypes, the unconscious, and individuation.
 Write clearly and thoughtfully.
-Ask a question depending on the analysis given about how the user is doing.
 """
 
 @app.route("/", methods=["GET", "POST"])
