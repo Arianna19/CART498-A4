@@ -50,6 +50,7 @@ def index():
                 model="gpt-image-1",
                 prompt=f"Surreal dream imagery inspired by this dream: {dream_text}",
                 size="auto"
+                quality="low"
             )
 
             image_base64 = image_response.data[0].b64_json
